@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Comics"
 include(":app")
+includeBuild("buildComposite")

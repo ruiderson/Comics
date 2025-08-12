@@ -14,10 +14,11 @@ class AppPlugin : Plugin<Project> {
         plugins {
             alias(libs.plugins.androidApplication)
             alias(libs.plugins.kotlinAndroid)
+            alias(libs.plugins.compose.compiler)
         }
 
         kotlin {
-            compilerOptions.jvmTarget.set(ProjectSettings.jvmTarget)
+            jvmToolchain(ProjectSettings.jvmToolchain)
         }
 
         android {
@@ -25,12 +26,8 @@ class AppPlugin : Plugin<Project> {
             compileSdk = libs.versions.android.compileSdk.get().toInt()
 
             defaultConfig {
-                applicationId = ProjectSettings.id
                 minSdk = libs.versions.android.minSdk.get().toInt()
                 targetSdk = libs.versions.android.targetSdk.get().toInt()
-                versionCode = ProjectSettings.versionCode
-                versionName = ProjectSettings.versionName
-
                 testInstrumentationRunner = ProjectSettings.testInstrumentationRunner
 
                 javaCompileOptions {
@@ -41,6 +38,10 @@ class AppPlugin : Plugin<Project> {
                         )
                     }
                 }
+            }
+
+            buildFeatures {
+                compose = true
             }
 
             buildTypes {
@@ -55,5 +56,6 @@ class AppPlugin : Plugin<Project> {
                 targetCompatibility = ProjectSettings.javaVersion
             }
         }
+
     }
 }

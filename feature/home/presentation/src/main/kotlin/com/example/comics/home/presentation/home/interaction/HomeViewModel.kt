@@ -32,7 +32,6 @@ class HomeViewModel(
     internal val pagination: Flow<PagingData<ComicsPagingItem>> = Pager(
         config = PagingConfig(
             pageSize = ComicsPagingSource.ITEMS_PER_PAGE,
-            enablePlaceholders = false
         ),
         pagingSourceFactory = { ComicsPagingSource(getComicsUseCase) }
     ).flow.cachedIn(viewModelScope)

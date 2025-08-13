@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -78,10 +79,7 @@ internal fun HomeContent(
                             }
                         )
 
-                        is ComicsPagingItem.Header -> Box(Modifier
-                            .fillMaxWidth()
-                            .height(36.dp)
-                            .background(Color.White))
+                        is ComicsPagingItem.Header -> HeaderItem("Comics?")
 
                         is ComicsPagingItem.Divider -> HorizontalDivider()
                     }
@@ -90,17 +88,14 @@ internal fun HomeContent(
 
             state.items.apply {
                 when {
-                    loadState.refresh is LoadState.Loading -> {
-                        item { ComicPlaceholder() }
-                    }
+                    loadState.refresh is LoadState.Loading ||
                     loadState.append is LoadState.Loading -> {
-                        item { ComicPlaceholder() }
+                        item { LoadingItem() }
                     }
-                    loadState.refresh is LoadState.Error -> {
-                        item { ErrorPlaceholder() }
-                    }
+
+                    loadState.refresh is LoadState.Error ||
                     loadState.append is LoadState.Error -> {
-                        item { ErrorPlaceholder() }
+                        item { ErrorItem() }
                     }
                 }
             }
@@ -155,15 +150,32 @@ private fun ComicItem(
         )
         Text(
             text = comic.description ?: "",
-            textAlign = TextAlign.Center,
-            maxLines = 2,
+            textAlign = TextAlign.Left,
+            maxLines = 3,
             fontSize = 16.sp
         )
     }
 }
 
 @Composable
-private fun ComicPlaceholder(
+private fun HeaderItem(
+    text: String,
+    modifier: Modifier = Modifier
+) = Box(
+    modifier = modifier
+        .fillMaxWidth()
+        .padding(top = 36.dp, bottom = 20.dp)
+) {
+    Text(
+        text = text,
+        fontSize = 36.sp,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier.align(Alignment.Center)
+    )
+}
+
+@Composable
+private fun LoadingItem(
     modifier: Modifier = Modifier
 ) = Box(
     modifier = modifier
@@ -179,7 +191,7 @@ private fun ComicPlaceholder(
 }
 
 @Composable
-private fun ErrorPlaceholder(
+private fun ErrorItem(
     modifier: Modifier = Modifier
 ) = Box(
     modifier = modifier

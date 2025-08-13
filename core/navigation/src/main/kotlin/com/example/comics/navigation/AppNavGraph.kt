@@ -15,16 +15,14 @@ import com.example.comics.home.presentation.home.ui.HomeScreen
 fun AppNavGraph(
     startDestination: Destinations = Destinations.Home,
     navController: NavHostController = rememberNavController()
+) = NavHost(
+    navController = navController,
+    startDestination = startDestination,
+    modifier = Modifier.fillMaxSize().background(Color.Black),
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = startDestination,
-        modifier = Modifier.fillMaxSize().background(Color.Black),
-    ) {
-        composable<Destinations.Home> {
-            HomeScreen(
-                onNavigateToDetails = { }
-            )
-        }
+    composable<Destinations.Home> {
+        HomeScreen(
+            onNavigateToDetails = { }
+        )
     }
 }

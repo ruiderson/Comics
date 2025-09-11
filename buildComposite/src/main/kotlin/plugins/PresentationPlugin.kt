@@ -19,6 +19,7 @@ class PresentationPlugin : Plugin<Project> {
             alias(libs.plugins.androidLibrary)
             alias(libs.plugins.kotlinAndroid)
             alias(libs.plugins.compose.compiler)
+            apply("kotlin-parcelize")
         }
 
         dependencies {

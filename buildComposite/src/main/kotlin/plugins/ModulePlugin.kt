@@ -16,6 +16,7 @@ class ModulePlugin : Plugin<Project> {
         plugins {
             alias(libs.plugins.androidLibrary)
             alias(libs.plugins.kotlinAndroid)
+            apply("kotlin-parcelize")
         }
 
         dependencies {

@@ -15,6 +15,7 @@ class AppPlugin : Plugin<Project> {
             alias(libs.plugins.androidApplication)
             alias(libs.plugins.kotlinAndroid)
             alias(libs.plugins.compose.compiler)
+            apply("kotlin-parcelize")
         }
 
         kotlin {

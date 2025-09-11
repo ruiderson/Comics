@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.comics.home.presentation.home.ui.HomeScreen
+import com.example.comics.home.presentation.registration.ui.RegistrationScreen
 
 @Composable
 fun AppNavGraph(
@@ -21,7 +22,7 @@ fun AppNavGraph(
     modifier = Modifier.fillMaxSize().background(Color.Black),
 ) {
     composable<Destinations.Home> {
-        HomeScreen(
+        RegistrationScreen(
             onNavigateToDetails = { }
         )
     }
